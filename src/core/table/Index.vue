@@ -86,11 +86,6 @@ function doLayout() {
           continue
         }
         // tbody 不设置maxWidth，数据会撑开td
-        column.style.maxWidth = width
-        column.style.width = width
-        column.style.minWidth = width
-
-        // thead
         column.style.minWidth = width
         column.style.width = width
         column.style.maxWidth = width
@@ -107,30 +102,29 @@ function doLayout() {
   })
 }
 
-// 对列按照hl-table-column的顺序排序
+// 对列按照mu-table-column的顺序排序
 function sortColumns() {
   const table = document.getElementById(tableId)
 
-  if (!table)
-    return
+  if (table) {
+    const trs = table.querySelector('.hidden-columns')!.querySelectorAll('div')
+    if (trs && trs.length > 0) {
+      const column_map: {
+        [x: string]: object
+      } = {}
+      store.value.columns.forEach((item) => {
+        column_map[item.uuid] = item
+      })
 
-  const trs = table.querySelector('.hidden-columns')!.querySelectorAll('div')
-  if (trs && trs.length > 0) {
-    const column_map: {
-      [x: string]: object
-    } = {}
-    store.value.columns.forEach((item) => {
-      column_map[item.uuid] = item
-    })
+      const new_columns: any[] = []
+      trs.forEach((tr) => {
+        const id = tr.getAttribute('id') as string
+        if (column_map[id])
+          new_columns.push(column_map[id])
+      })
 
-    const new_columns: any[] = []
-    trs.forEach((tr) => {
-      const id = tr.getAttribute('id') as string
-      if (column_map[id])
-        new_columns.push(column_map[id])
-    })
-
-    store.value.setColumns(new_columns)
+      store.value.setColumns(new_columns)
+    }
   }
 }
 
@@ -150,11 +144,6 @@ function clearStyle() {
 
   columns.forEach((col) => {
     // tbody
-    col.style.width = col.orgWidth
-    col.style.minWidth = col.orgMinWidth
-    col.style.maxWidth = ''
-
-    // thead
     col.style.width = col.orgWidth
     col.style.minWidth = col.orgMinWidth
     col.style.maxWidth = ''

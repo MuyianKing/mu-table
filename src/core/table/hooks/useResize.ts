@@ -4,6 +4,7 @@ export default function (tableId: string, resize: () => void) {
   let mutationObserver: MutationObserver | null = null
   let intersectionObserver: IntersectionObserver | null = null
   let last_intersection_observer_status = 0
+
   function disconnectObserver() {
     mutationObserver && mutationObserver.disconnect()
     intersectionObserver && intersectionObserver.disconnect()
