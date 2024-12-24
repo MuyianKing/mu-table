@@ -28,5 +28,5 @@ export default antfu({
       multiline: 'beside',
     }],
   },
-  files: ['**/src/**', 'vite.config.ts'],
+  files: ['**/src/**'],
 })

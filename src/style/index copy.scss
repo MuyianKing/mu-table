@@ -1,0 +1,33 @@
+.mu-table {
+  .body-wrapper {
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: fit-content;
+    min-width: 100%;
+    position: relative;
+    scrollbar-width: none;
+    max-height: calc(100% - 41px);
+  }
+
+  .body-wrapper::-webkit-scrollbar {
+    width: 0px;
+    height: 7px;
+  }
+
+  .body-wrapper::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 20px;
+  }
+
+  .body-wrapper:hover::-webkit-scrollbar-thumb {
+    background: rgba(185, 186, 189, 0.6);
+  }
+}
+
+.mu-table-nowrap {
+  table {
+    .mu-table-td {
+      white-space: nowrap;
+    }
+  }
+}

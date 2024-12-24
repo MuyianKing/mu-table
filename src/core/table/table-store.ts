@@ -1,32 +1,31 @@
-class TableStore {
+export default class TableStore {
+  columns: any[]
+  data: any[]
+  table: object
+
   constructor() {
+    // table的配置
+    this.table = {}
+
     // 列配置
     this.columns = []
 
     // 数据
     this.data = []
-
-    // 自定义表头保存的字段
-    this.storageKey = []
   }
 
   // 设置数据
-  setData(data) {
+  setData(data: any[]) {
     this.data = data
   }
 
   // 设置columns
-  setColumns(columns) {
+  setColumns(columns: any[]) {
     this.columns = columns
   }
 
-  // 设置自定义表头的key
-  setStorageKey(key) {
-    this.storageKey = key
-  }
-
   // 插入列
-  insertColumn(column) {
+  insertColumn(column: any) {
     const index = this.columns.findIndex(item => (item.uuid === column.uuid))
     if (index > -1) {
       this.updateColumn(index, column)
@@ -36,17 +35,15 @@ class TableStore {
   }
 
   // 更新列
-  updateColumn(index, column) {
+  updateColumn(index: number, column: any) {
     this.columns[index] = (column)
   }
 
   // 删除列
-  deleteColumn(uuid) {
+  deleteColumn(uuid: string) {
     const index = this.columns.findIndex(item => (item.uuid === uuid))
     if (index > -1) {
       this.columns.splice(index, 1)
     }
   }
 }
-
-export default TableStore
