@@ -161,7 +161,7 @@ function clearStyle() {
 
     // thead
     col.style.width = col.orgWidth
-    col.style.minWidth = col.minWidth
+    col.style.minWidth = col.orgMinWidth
     col.style.maxWidth = ''
   })
   store.value.setColumns(columns)

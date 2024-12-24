@@ -1,6 +1,8 @@
-import { computed, inject } from 'vue'
+import type { ColumnRow } from '../types/index'
+import { computed, defineComponent, inject, ref } from 'vue'
+import TableStore from './table-store'
 
-export default {
+export default defineComponent({
   name: 'MuTableBody',
   props: {
     // 主键
@@ -14,11 +16,11 @@ export default {
     },
   },
   setup(props, { emit }) {
-    const store = inject('tableStore', { columns: [] })
+    const store = inject('tableStore', ref(new TableStore()))
     const columns = computed(() => store.value.columns)
     const data = computed(() => store.value.data)
 
-    function getClassName({ index, row }) {
+    function getClassName({ index, row }: ColumnRow) {
       const arr = props.rowClass ? ['mu-table-tr', props.rowClass({ index, row })] : ['mu-table-tr']
       if (index % 2 !== 0) {
         arr.push('mu-table-td-enev')
@@ -27,11 +29,11 @@ export default {
       return arr.filter(item => item).join(' ')
     }
 
-    function rowClick(row, index) {
-      emit('row-click', row, index)
+    function rowClick(item: ColumnRow) {
+      emit('row-click', item)
     }
     return () => (
-      <table class="mu-table-body" cellspacing="0" cellpadding="0" border="0">
+      <table class="mu-table-body" cellspacing="0" cellpadding="0">
         <tbody>
           {
             data.value.map((row, index) => {
@@ -40,7 +42,7 @@ export default {
                   key={row[props.rowKey]}
                   class={getClassName({ index, row })}
                   onClick={() => {
-                    rowClick(row, index)
+                    rowClick({ row, index })
                   }}
                 >
                   {columns.value.map(column => (
@@ -68,4 +70,4 @@ export default {
       </table>
     )
   },
-}
+})

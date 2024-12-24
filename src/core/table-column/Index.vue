@@ -1,55 +1,40 @@
 <script setup lang="ts">
-import { inject, onMounted, useId, useSlots } from 'vue'
+import type { Align, ColumnRow, ColumnSlot } from '../types/index'
+import { inject, onMounted, ref, useId, useSlots } from 'vue'
 import { getCanUseValue } from '../../utils/common'
+import TableStore from '../table/table-store'
 
 defineOptions({
   name: 'HlTableColumn',
 })
 
-const props = defineProps({
-  prop: {
-    type: String,
-    default: '',
-  },
-  label: {
-    type: String,
-    default: '',
-  },
-  width: {
-    type: [String, Number],
-    default: '',
-  },
-  minWidth: {
-    type: [Number, String],
-    default: '',
-  },
-  align: {
-    type: String,
-    default: 'center',
-  },
-  className: {
-    type: String,
-    default: '',
-  },
-})
+const props = defineProps<{
+  prop: string
+  label: string
+  width: string
+  minWidth: string
+  align: Align
+  className: string
+}>()
 
 // 唯一id
 const uuid = useId()
 
 // 没有插槽的渲染函数
-const DEFAULT_RENDER_CELL = function ({ row }) {
+function DEFAULT_RENDER_CELL({ row }: ColumnRow): string {
   return (row[props.prop] === undefined || row[props.prop] === null) ? '' : row[props.prop]
 }
 
 // 插槽
-const slots = useSlots()
-const store = inject('tableStore', null)
+const slots: ColumnSlot = useSlots()
+
+const store = inject('tableStore', ref(new TableStore()))
 
 // 渲染函数
 const renderCell = slots.default || DEFAULT_RENDER_CELL
 
 // 渲染方法
-function renderRow(data) {
+function renderRow(data: ColumnRow) {
   return renderCell(data)
 }
 
@@ -81,9 +66,10 @@ function init() {
       textAlign,
       minWidth,
       width,
+      maxWidth: width,
     },
     render: renderRow,
-    renderHeader: slots.header || null,
+    renderHeader: slots.header,
   })
 }
 

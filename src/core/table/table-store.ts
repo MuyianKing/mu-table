@@ -1,11 +1,17 @@
+import type { Column } from '../types/'
+
 export default class TableStore {
-  columns: any[]
+  columns: Column[]
   data: any[]
-  table: object
+  table: {
+    align: 'left' | 'right' | 'center'
+  }
 
   constructor() {
     // table的配置
-    this.table = {}
+    this.table = {
+      align: 'center',
+    }
 
     // 列配置
     this.columns = []
@@ -25,7 +31,7 @@ export default class TableStore {
   }
 
   // 插入列
-  insertColumn(column: any) {
+  insertColumn(column: Column) {
     const index = this.columns.findIndex(item => (item.uuid === column.uuid))
     if (index > -1) {
       this.updateColumn(index, column)
@@ -35,7 +41,7 @@ export default class TableStore {
   }
 
   // 更新列
-  updateColumn(index: number, column: any) {
+  updateColumn(index: number, column: Column) {
     this.columns[index] = (column)
   }
 
