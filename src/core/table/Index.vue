@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { nextTick, provide, ref, useId, watch } from 'vue'
+import { useDebounceFn } from '@vueuse/core'
+import { nextTick, onMounted, provide, ref, useId, watch } from 'vue'
+import useResize from './hooks/useResize'
 import TableBody from './table-body.tsx'
 import TableHeader from './table-header.tsx'
 import TableStore from './table-store'
@@ -70,13 +72,8 @@ function doLayout() {
     const trs = tbody[0].getElementsByClassName('mu-table-tr')
 
     if (trs && trs.length > 0) {
-      console.log(4)
-
       // 获取thead的th
       const body_tds = trs[0].getElementsByClassName('mu-table-td')
-
-      console.log(body_tds)
-
       // 设置宽度
       const columns = [...store.value.columns]
       for (let i = 0, len = body_tds.length; i < len; i++) {
@@ -88,9 +85,6 @@ function doLayout() {
         if (!column) {
           continue
         }
-
-        console.log(width)
-
         // tbody 不设置maxWidth，数据会撑开td
         column.style.maxWidth = width
         column.style.width = width
@@ -100,13 +94,14 @@ function doLayout() {
         column.style.minWidth = width
         column.style.width = width
         column.style.maxWidth = width
-
-        console.log(column)
       }
 
       store.value.setColumns(columns)
 
       sortColumns()
+      nextTick(() => {
+        startObserve()
+      })
     }
     refresh_layout.value = false
   })
@@ -177,6 +172,18 @@ watch(() => props.data, (val) => {
   })
 }, {
   immediate: true,
+})
+
+// 监听表格容器变化，重新布局
+const resize = useDebounceFn(() => {
+  // 取消不换行
+  refresh_layout.value = true
+  doLayout()
+}, 100)
+
+const { watchTableResize, startObserve } = useResize(tableId, resize)
+onMounted(() => {
+  watchTableResize()
 })
 </script>
 

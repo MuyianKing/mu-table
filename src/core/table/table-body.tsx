@@ -1,5 +1,5 @@
 import type { ColumnRow } from '../types/index'
-import { computed, defineComponent, inject, ref } from 'vue'
+import { computed, defineComponent, inject, ref, useId } from 'vue'
 import TableStore from './table-store'
 
 export default defineComponent({
@@ -39,7 +39,7 @@ export default defineComponent({
             data.value.map((row, index) => {
               const arr = [
                 <tr
-                  key={row[props.rowKey]}
+                  key={row[props.rowKey] || useId()}
                   class={getClassName({ index, row })}
                   onClick={() => {
                     rowClick({ row, index })

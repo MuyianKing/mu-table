@@ -1,7 +1,7 @@
 export interface Column {
   uuid: string
   label: string
-  className: string
+  className?: string
   orgWidth: string
   orgMinWidth: string
   style: {

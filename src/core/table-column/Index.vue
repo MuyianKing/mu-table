@@ -9,12 +9,12 @@ defineOptions({
 })
 
 const props = defineProps<{
-  prop: string
-  label: string
-  width: string
-  minWidth: string
-  align: Align
-  className: string
+  prop?: string
+  label?: string
+  width?: string
+  minWidth?: string
+  align?: Align
+  className?: string
 }>()
 
 // 唯一id
@@ -22,6 +22,10 @@ const uuid = useId()
 
 // 没有插槽的渲染函数
 function DEFAULT_RENDER_CELL({ row }: ColumnRow): string {
+  if (!props.prop) {
+    return ''
+  }
+
   return (row[props.prop] === undefined || row[props.prop] === null) ? '' : row[props.prop]
 }
 
@@ -49,7 +53,7 @@ function init() {
   }
 
   // 宽度
-  const width = getCanUseValue(props.width)
+  const width = getCanUseValue(props.width || '')
 
   // 对其方式
   const textAlign = props.align || store.value.table.align || 'left'
