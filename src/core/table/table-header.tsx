@@ -1,5 +1,5 @@
 import { computed, defineComponent, inject, ref } from 'vue'
-import TableStore from './table-store'
+import TableStore from '../types/table-store'
 
 export default defineComponent({
   props: {},
@@ -23,7 +23,7 @@ export default defineComponent({
                 style={column.style}
                 key={column.uuid}
               >
-                <div class="mu-table-th-div" style={{ justifyContent: align_map[column.style.textAlign] }}>
+                <div class="mu-table-th-div" style={{ justifyContent: align_map[column.style.textAlign || store.value.table.align || 'center'] }}>
                   {column.renderHeader
                     ? column.renderHeader()
                     : (

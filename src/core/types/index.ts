@@ -5,7 +5,7 @@ export interface Column {
   orgWidth: string
   orgMinWidth: string
   style: {
-    textAlign: Align
+    textAlign?: Align
     minWidth: string
     maxWidth: string
     width: string

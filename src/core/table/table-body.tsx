@@ -1,16 +1,11 @@
 import type { ColumnRow } from '../types/index'
 import { computed, defineComponent, inject, ref, useId } from 'vue'
+import TableStore from '../types/table-store'
 import useTips from './hooks/useTips'
-import TableStore from './table-store'
 
 export default defineComponent({
   name: 'MuTableBody',
   props: {
-    // 主键
-    rowKey: {
-      type: String,
-      default: 'id',
-    },
     rowClass: {
       type: Function,
       default: null,
@@ -43,7 +38,7 @@ export default defineComponent({
             data.value.map((row, row_index) => {
               const arr = [
                 <tr
-                  key={row[props.rowKey] || useId()}
+                  key={row[store.value.table.rowKey] || useId()}
                   class={getClassName({ index: row_index, row })}
                   onClick={() => {
                     rowClick({ row, index: row_index })
@@ -53,8 +48,8 @@ export default defineComponent({
                     <td
                       key={column.uuid}
                       data-uuid={column.uuid}
-                      class={`mu-table-cell mu-table-td ${column.className}`}
-                      style={column.style}
+                      class={`mu-table-cell mu-table-td ${column.className || ''}`}
+                      style={{ ...column.style, textAlign: column.style.textAlign || store.value.table.align }}
                       onMouseenter={store.value.table.nowrap ? e => setTips(e, data.value.length > 8 && (row_index + 1) > data.value.length / 2) : undefined}
                       onMouseleave={store.value.table.nowrap ? hideTip : undefined}
                     >

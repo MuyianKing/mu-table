@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { inject, ref } from 'vue'
-import TableStore from './table-store'
+import TableStore from '../types/table-store'
 
 defineProps({
   active: {

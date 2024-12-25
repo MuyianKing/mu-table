@@ -2,31 +2,38 @@
 import type { Align } from '../types/index'
 import { useDebounceFn } from '@vueuse/core'
 import { nextTick, onMounted, provide, ref, useId, watch } from 'vue'
+import { getCanUseValue } from '../../utils/common'
+import TableStore from '../types/table-store'
 import useResize from './hooks/useResize'
 import ScrollBar from './ScrollBar.vue'
 import TableBody from './table-body.tsx'
 import TableHeader from './table-header.tsx'
-import TableStore from './table-store'
 
 defineOptions({
   name: 'MuTable',
 })
 
-const props = withDefaults(defineProps<Props>(), {
-  data: () => [],
-  noBorder: false,
-  nowrap: false,
-  align: 'center',
-  scrollbarAlwaysOn: false,
-})
-
-interface Props {
+const props = withDefaults(defineProps<{
   data: unknown[]
   noBorder?: boolean
   nowrap?: boolean
   align?: Align
   scrollbarAlwaysOn?: boolean // 始终显示滚动条
-}
+  rowKey?: string
+  maxHeight?: string | number // 表格最大高度
+  stripe?: boolean
+  rowClass?: (row: { index: number, row: any }) => string
+}>(), {
+  data: () => [],
+  noBorder: false,
+  nowrap: false,
+  align: 'center',
+  scrollbarAlwaysOn: false,
+  rowKey: 'id',
+  maxHeight: '',
+  stripe: false,
+  rowClass: undefined,
+})
 
 const store = ref(new TableStore())
 provide('tableStore', store)
@@ -179,9 +186,14 @@ watch(() => store.value.columns.length, () => {
   })
 })
 
-watch([() => props.nowrap], () => {
+watch([
+  () => props.nowrap,
+  () => props.align,
+  () => props.rowKey,
+], () => {
   store.value.table.align = props.align
   store.value.table.nowrap = props.nowrap
+  store.value.table.rowKey = props.rowKey
 }, {
   immediate: true,
 })
@@ -207,14 +219,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :id="tableId" class="mu-table" :class="{ 'mu-table-border': !noBorder, 'mu-table-nowrap': nowrap && !refresh_layout }">
+  <div :id="tableId" class="mu-table" :class="{ 'mu-table-border': !noBorder, 'mu-table-nowrap': nowrap && !refresh_layout, 'mu-table-stripe': stripe }">
     <div class="hidden-columns">
       <slot />
     </div>
-
     <table-header />
-    <div class="body-wrapper" @scroll="handleScroll" @mouseenter="scroll_bar_active = data.length > 0 && true" @mouseleave="scroll_bar_active = false">
-      <table-body />
+    <div class="body-wrapper" :style="{ maxHeight: getCanUseValue(maxHeight) }" @scroll="handleScroll" @mouseenter="scroll_bar_active = data.length > 0 && true" @mouseleave="scroll_bar_active = false">
+      <table-body :row-class />
 
       <!-- 自定义滚动条 -->
       <scroll-bar ref="scroll_bar" :table-id="tableId" :active="scrollbarAlwaysOn || scroll_bar_active" />

@@ -31,23 +31,26 @@
   z-index: -1;
 }
 
+
+$border:1px solid #eeeeee;
+
 .mu-table-border {
   .mu-table-header {
-    border-top: 1px solid #dfdfdf;
+    border-top: $border;
   }
 
   table {
-    border-left: 1px solid #dfdfdf;
+    border-left: $border;
 
     tbody td,
     thead th {
-      border-bottom: 1px solid #dfdfdf;
-      border-right: 1px solid #dfdfdf;
+      border-right: $border;
+      border-bottom: $border;
     }
   }
 
   .mu-table-no-data {
-    border-bottom: 1px solid #dfdfdf;
+    border-bottom: $border;
   }
 }
 
@@ -64,4 +67,11 @@
 .body-wrapper::-webkit-scrollbar {
   width: 0px;
   height: 7px;
+}
+
+
+.mu-table-stripe {
+  .mu-table-tr:nth-child(2n) {
+    background-color: #fafafa;
+  }
 }

@@ -2,7 +2,7 @@
 import type { Align, ColumnRow, ColumnSlot } from '../types/index'
 import { inject, onMounted, onUnmounted, ref, useId, useSlots } from 'vue'
 import { getCanUseValue } from '../../utils/common'
-import TableStore from '../table/table-store'
+import TableStore from '../types/table-store'
 
 defineOptions({
   name: 'HlTableColumn',
@@ -56,7 +56,7 @@ function init() {
   const width = getCanUseValue(props.width || '')
 
   // 对其方式
-  const textAlign = props.align || store.value.table.align || 'left'
+  const textAlign = props.align
 
   // 插入列
   store.value.insertColumn({

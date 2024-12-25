@@ -8,5 +8,5 @@ export function getCanUseValue(str: string | number): string {
     return str as string
   }
   // 数字添加px
-  return `${str}px`
+  return str ? `${str}px` : ''
 }

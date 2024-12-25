@@ -1,20 +1,20 @@
-import type { Column } from '../types/'
+import type { Align, Column } from './index'
 
 export default class TableStore {
   columns: Column[]
   data: any[]
   table: {
     id: string
-    align: 'left' | 'right' | 'center'
-    nowrap: boolean
+    align?: Align
+    nowrap?: boolean
+    rowKey: string
   }
 
   constructor() {
     // table的配置
     this.table = {
       id: '',
-      align: 'center',
-      nowrap: false,
+      rowKey: 'id',
     }
 
     // 列配置
