@@ -33,7 +33,7 @@ export default function (tableId: string, resize: () => void) {
 
     let table = document.getElementById(tableId)
     if (table instanceof Element) {
-      table = table.querySelector('.hl-table-body')
+      table = table.querySelector('.mu-table-body')
 
       if (!table) {
         return

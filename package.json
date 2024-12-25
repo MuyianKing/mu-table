@@ -11,6 +11,7 @@
     "update-dep": "npm-check-updates & ncu -u & pnpm i"
   },
   "dependencies": {
+    "@floating-ui/dom": "^1.1.5",
     "@vueuse/core": "^12.2.0",
     "element-plus": "^2.9.1",
     "vue": "^3.5.13"

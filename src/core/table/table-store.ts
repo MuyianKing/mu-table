@@ -4,13 +4,16 @@ export default class TableStore {
   columns: Column[]
   data: any[]
   table: {
+    id: string
     align: 'left' | 'right' | 'center'
+    nowrap: boolean
   }
 
   constructor() {
     // table的配置
     this.table = {
       align: 'center',
+      nowrap: false,
     }
 
     // 列配置

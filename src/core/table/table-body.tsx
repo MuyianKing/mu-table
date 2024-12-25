@@ -1,5 +1,6 @@
 import type { ColumnRow } from '../types/index'
 import { computed, defineComponent, inject, ref, useId } from 'vue'
+import useTips from './hooks/useTips'
 import TableStore from './table-store'
 
 export default defineComponent({
@@ -20,36 +21,48 @@ export default defineComponent({
     const columns = computed(() => store.value.columns)
     const data = computed(() => store.value.data)
 
+    console.log(store.value.table.nowrap)
+
     function getClassName({ index, row }: ColumnRow) {
       const arr = props.rowClass ? ['mu-table-tr', props.rowClass({ index, row })] : ['mu-table-tr']
       if (index % 2 !== 0) {
         arr.push('mu-table-td-enev')
       }
-
       return arr.filter(item => item).join(' ')
     }
 
     function rowClick(item: ColumnRow) {
       emit('row-click', item)
     }
+
+    const tooltip_id = useId()
+    const { setTips, hideTip } = useTips(tooltip_id)
+
     return () => (
       <table class="mu-table-body" cellspacing="0" cellpadding="0">
         <tbody>
           {
-            data.value.map((row, index) => {
+            data.value.map((row, row_index) => {
               const arr = [
                 <tr
                   key={row[props.rowKey] || useId()}
-                  class={getClassName({ index, row })}
+                  class={getClassName({ index: row_index, row })}
                   onClick={() => {
-                    rowClick({ row, index })
+                    rowClick({ row, index: row_index })
                   }}
                 >
                   {columns.value.map(column => (
-                    <td key={column.uuid} data-uuid={column.uuid} class={`mu-table-cell mu-table-td ${column.className}`} style={column.style}>
+                    <td
+                      key={column.uuid}
+                      data-uuid={column.uuid}
+                      class={`mu-table-cell mu-table-td ${column.className}`}
+                      style={column.style}
+                      onMouseenter={store.value.table.nowrap ? e => setTips(e, data.value.length > 8 && (row_index + 1) > data.value.length / 2) : undefined}
+                      onMouseleave={store.value.table.nowrap ? hideTip : undefined}
+                    >
                       {column.render({
                         row,
-                        index,
+                        index: row_index,
                       })}
                     </td>
                   ))}
@@ -67,6 +80,10 @@ export default defineComponent({
             </tr>
           )}
         </tbody>
+
+        <div class="mu-table-tooltip" id={tooltip_id}>
+          这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字
+        </div>
       </table>
     )
   },

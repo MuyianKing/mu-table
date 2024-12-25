@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import type { Align } from '../types/index'
 import { useDebounceFn } from '@vueuse/core'
 import { nextTick, onMounted, provide, ref, useId, watch } from 'vue'
 import useResize from './hooks/useResize'
+import ScrollBar from './ScrollBar.vue'
 import TableBody from './table-body.tsx'
 import TableHeader from './table-header.tsx'
 import TableStore from './table-store'
@@ -10,24 +12,25 @@ defineOptions({
   name: 'MuTable',
 })
 
-const props = defineProps({
-  data: {
-    type: Array,
-    default() {
-      return []
-    },
-  },
-  // 是否显示边框
-  border: {
-    type: Boolean,
-    default: true,
-  },
+const props = withDefaults(defineProps<Props>(), {
+  data: () => [],
+  noBorder: false,
+  nowrap: false,
+  align: 'center',
 })
+
+interface Props {
+  data: unknown[]
+  noBorder?: boolean
+  nowrap?: boolean
+  align?: Align
+}
 
 const store = ref(new TableStore())
 provide('tableStore', store)
 
 const tableId = useId()
+store.value.table.id = tableId
 
 const refresh_layout = ref(false)
 // 根据tbody设置thead
@@ -98,6 +101,10 @@ function doLayout() {
         startObserve()
       })
     }
+
+    setTimeout(() => {
+      scroll_bar.value && scroll_bar.value.setScroll()
+    }, 0)
     refresh_layout.value = false
   })
 }
@@ -163,6 +170,13 @@ watch(() => props.data, (val) => {
   immediate: true,
 })
 
+watch([() => props.nowrap], () => {
+  store.value.table.align = props.align
+  store.value.table.nowrap = props.nowrap
+}, {
+  immediate: true,
+})
+
 // 监听表格容器变化，重新布局
 const resize = useDebounceFn(() => {
   // 取消不换行
@@ -171,20 +185,31 @@ const resize = useDebounceFn(() => {
 }, 100)
 
 const { watchTableResize, startObserve } = useResize(tableId, resize)
+
+const scroll_bar = ref()
+function handleScroll() {
+  console.log('handleScroll')
+
+  scroll_bar.value && scroll_bar.value.scrollBar()
+}
+
 onMounted(() => {
   watchTableResize()
 })
 </script>
 
 <template>
-  <div :id="tableId" class="mu-table" :class="{ 'mu-table-border': border }">
+  <div :id="tableId" class="mu-table" :class="{ 'mu-table-border': !noBorder, 'mu-table-nowrap': nowrap && !refresh_layout }">
     <div class="hidden-columns">
       <slot />
     </div>
 
     <table-header />
-    <div class="body-wrapper">
+    <div class="body-wrapper" @scroll="handleScroll">
       <table-body />
+
+      <!-- 自定义滚动条 -->
+      <scroll-bar ref="scroll_bar" :table-id="tableId" :active="true" />
     </div>
   </div>
 </template>

@@ -13,3 +13,25 @@
   height: 60px;
   line-height: 60px !important;
 }
+
+.mu-table-nowrap {
+  table {
+    .mu-table-td {
+      white-space: nowrap;
+    }
+  }
+}
+
+.mu-table-tooltip {
+  position: fixed;
+  background-color: #000;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  pointer-events: none;
+  user-select: none;
+  display: none;
+  max-height: 100vh;
+  max-width: 400px;
+  word-break: break-all;
+}

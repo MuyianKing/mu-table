@@ -13,7 +13,7 @@
   }
 }
 
-.mu-table-cell{
+.mu-table-cell {
   box-sizing: border-box;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -49,4 +49,19 @@
   .mu-table-no-data {
     border-bottom: 1px solid #dfdfdf;
   }
+}
+
+.body-wrapper {
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: fit-content;
+  min-width: 100%;
+  scrollbar-width: none;
+  max-height: calc(100% - 41px);
+  position: relative;
+}
+
+.body-wrapper::-webkit-scrollbar {
+  width: 0px;
+  height: 7px;
 }
