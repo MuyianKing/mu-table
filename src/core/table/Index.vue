@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Align } from '../types/index'
+import type TableProps from '../types/TableProps'
 import { useDebounceFn } from '@vueuse/core'
 import { nextTick, onMounted, provide, ref, useId, watch } from 'vue'
 import { getCanUseValue } from '../../utils/common'
@@ -13,17 +13,7 @@ defineOptions({
   name: 'MuTable',
 })
 
-const props = withDefaults(defineProps<{
-  data: unknown[]
-  noBorder?: boolean
-  nowrap?: boolean
-  align?: Align
-  scrollbarAlwaysOn?: boolean // 始终显示滚动条
-  rowKey?: string
-  maxHeight?: string | number // 表格最大高度
-  stripe?: boolean
-  rowClass?: (row: { index: number, row: any }) => string
-}>(), {
+const props = withDefaults(defineProps<TableProps>(), {
   data: () => [],
   noBorder: false,
   nowrap: false,
