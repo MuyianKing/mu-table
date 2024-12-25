@@ -17,6 +17,7 @@ const props = withDefaults(defineProps<Props>(), {
   noBorder: false,
   nowrap: false,
   align: 'center',
+  scrollbarAlwaysOn: false,
 })
 
 interface Props {
@@ -24,6 +25,7 @@ interface Props {
   noBorder?: boolean
   nowrap?: boolean
   align?: Align
+  scrollbarAlwaysOn?: boolean // 始终显示滚动条
 }
 
 const store = ref(new TableStore())
@@ -35,6 +37,8 @@ store.value.table.id = tableId
 const refresh_layout = ref(false)
 // 根据tbody设置thead
 function doLayout() {
+  console.log('doLayout')
+
   const table = document.getElementById(tableId)
   if (!table) {
     return
@@ -77,6 +81,7 @@ function doLayout() {
     if (trs && trs.length > 0) {
       // 获取thead的th
       const body_tds = trs[0].getElementsByClassName('mu-table-td')
+
       // 设置宽度
       const columns = [...store.value.columns]
       for (let i = 0, len = body_tds.length; i < len; i++) {
@@ -95,11 +100,8 @@ function doLayout() {
       }
 
       store.value.setColumns(columns)
-
       sortColumns()
-      nextTick(() => {
-        startObserve()
-      })
+      startObserve()
     }
 
     setTimeout(() => {
@@ -168,6 +170,13 @@ watch(() => props.data, (val) => {
   })
 }, {
   immediate: true,
+  deep: true,
+})
+
+watch(() => store.value.columns.length, () => {
+  nextTick(() => {
+    resize()
+  })
 })
 
 watch([() => props.nowrap], () => {
@@ -187,9 +196,8 @@ const resize = useDebounceFn(() => {
 const { watchTableResize, startObserve } = useResize(tableId, resize)
 
 const scroll_bar = ref()
+const scroll_bar_active = ref(false)
 function handleScroll() {
-  console.log('handleScroll')
-
   scroll_bar.value && scroll_bar.value.scrollBar()
 }
 
@@ -205,11 +213,11 @@ onMounted(() => {
     </div>
 
     <table-header />
-    <div class="body-wrapper" @scroll="handleScroll">
+    <div class="body-wrapper" @scroll="handleScroll" @mouseenter="scroll_bar_active = data.length > 0 && true" @mouseleave="scroll_bar_active = false">
       <table-body />
 
       <!-- 自定义滚动条 -->
-      <scroll-bar ref="scroll_bar" :table-id="tableId" :active="true" />
+      <scroll-bar ref="scroll_bar" :table-id="tableId" :active="scrollbarAlwaysOn || scroll_bar_active" />
     </div>
   </div>
 </template>

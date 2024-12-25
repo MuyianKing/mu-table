@@ -12,6 +12,7 @@ export default class TableStore {
   constructor() {
     // table的配置
     this.table = {
+      id: '',
       align: 'center',
       nowrap: false,
     }

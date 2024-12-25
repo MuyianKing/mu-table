@@ -21,8 +21,6 @@ export default defineComponent({
     const columns = computed(() => store.value.columns)
     const data = computed(() => store.value.data)
 
-    console.log(store.value.table.nowrap)
-
     function getClassName({ index, row }: ColumnRow) {
       const arr = props.rowClass ? ['mu-table-tr', props.rowClass({ index, row })] : ['mu-table-tr']
       if (index % 2 !== 0) {

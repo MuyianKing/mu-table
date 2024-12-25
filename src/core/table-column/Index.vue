@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Align, ColumnRow, ColumnSlot } from '../types/index'
-import { inject, onMounted, ref, useId, useSlots } from 'vue'
+import { inject, onMounted, onUnmounted, ref, useId, useSlots } from 'vue'
 import { getCanUseValue } from '../../utils/common'
 import TableStore from '../table/table-store'
 
@@ -79,6 +79,10 @@ function init() {
 
 onMounted(() => {
   init()
+})
+
+onUnmounted(() => {
+  store.value.deleteColumn(uuid)
 })
 </script>
 

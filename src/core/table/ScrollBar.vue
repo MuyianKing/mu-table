@@ -75,18 +75,5 @@ defineExpose({
 </template>
 
 <style lang="scss">
-.mu-table-scroll-bar {
-  display: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  border-radius: 5px;
-  width: 6px;
-  height: 100px;
-  background-color: rgba(185, 186, 189, 0.6);
-
-  &.active {
-    display: block;
-  }
-}
+@use '../../style/scrollbar.scss';
 </style>
