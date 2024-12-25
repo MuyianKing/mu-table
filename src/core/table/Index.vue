@@ -5,7 +5,7 @@ import { nextTick, onMounted, provide, ref, useId, watch } from 'vue'
 import { getCanUseValue } from '../../utils/common'
 import TableStore from '../types/table-store'
 import useResize from './hooks/useResize'
-import ScrollBar from './ScrollBar.vue'
+import ScrollBar from './ScrollBar.tsx'
 import TableBody from './table-body.tsx'
 import TableHeader from './table-header.tsx'
 
