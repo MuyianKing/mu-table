@@ -50,6 +50,15 @@ export default defineConfig({
 })
 ```
 
+### 使用
+
+```vue
+<mu-table :data>
+  <mu-table-column prop="index" label="序号" />
+  <mu-table-column v-if="show" prop="xm" label="姓名" />
+</mu-table>
+```
+
 ## 贡献
 
 <!-- readme: collaborators,contributors -start -->
