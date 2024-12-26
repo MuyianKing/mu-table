@@ -28,10 +28,19 @@
   color: white;
   padding: 5px 10px;
   border-radius: 5px;
-  pointer-events: none;
+  // pointer-events: none;
   user-select: none;
   display: none;
   max-height: 100vh;
   max-width: 400px;
   word-break: break-all;
+}
+
+
+.mu-table-tooltip-arrow {
+  position: absolute;
+  background: #222;
+  width: 8px;
+  height: 8px;
+  transform: rotate(45deg);
 }

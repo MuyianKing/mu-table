@@ -51,7 +51,7 @@ export default defineComponent({
                       data-uuid={column.uuid}
                       class={`mu-table-cell mu-table-td ${column.className || ''}`}
                       style={{ ...column.style, textAlign: column.style.textAlign || store.value.table.align }}
-                      onMouseenter={store.value.table.nowrap ? e => setTips(e, data.value.length > 8 && (row_index + 1) > data.value.length / 2) : undefined}
+                      onMouseenter={store.value.table.nowrap ? setTips : undefined}
                       onMouseleave={store.value.table.nowrap ? hideTip : undefined}
                     >
                       {column.render({
@@ -76,7 +76,10 @@ export default defineComponent({
         </tbody>
 
         <div class="mu-table-tooltip" id={tooltip_id}>
-          这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字
+          <div class="mu-table-tooltip-arrow"></div>
+          <div class="mu-table-tooltip-content">
+            这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字
+          </div>
         </div>
       </table>
     )

@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import type { Align } from '@type/index'
-
-import { getLabelByVal } from '@muyianking/utils'
+import { MuTable, MuTableColumn } from '@/core'
 import { ref } from 'vue'
 
-console.log(getLabelByVal([{ label: '11', value: 1 }], 1))
-
 const data = ref([{
-  gc: '一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子',
+  gc: '一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子,一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子,一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子',
   yc: '郭兰英',
   index: 1,
 }])
@@ -26,7 +23,7 @@ function handleClick(row: any) {
 const show = ref(true)
 
 function addText() {
-  data.value[0].gc = data.value[0].gc.length > 30 ? '一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子' : '一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子;看惯了船上的白帆姑娘好像花儿一样小伙儿心胸多宽广为了开辟新天地唤醒了沉睡的高山让那河流改变了模样'
+  data.value[0].gc = data.value[0].gc.length > 30 ? '一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子' : '一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子;看惯了船上的白帆姑娘好像花儿一样小伙儿心胸多宽广为了开辟新天地唤醒了沉睡的高山让那河流改变了模样;一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子;看惯了船上的白帆姑娘好像花儿一样小伙儿心胸多宽广为了开辟新天地唤醒了沉睡的高山让那河流改变了模样'
 }
 
 const maxHeight = ref('')
@@ -61,9 +58,9 @@ function setStripe() {
   stripe.value = !stripe.value
 }
 
-const nowrap = ref(false)
+const nowrap = ref(true)
 function setNowrap() {
-  data.value[0].gc = '一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子;看惯了船上的白帆姑娘好像花儿一样小伙儿心胸多宽广为了开辟新天地唤醒了沉睡的高山让那河流改变了模样'
+  data.value[0].gc = '一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子;看惯了船上的白帆姑娘好像花儿一样小伙儿心胸多宽广为了开辟新天地唤醒了沉睡的高山让那河流改变了模样；一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子;看惯了船上的白帆姑娘好像花儿一样小伙儿心胸多宽广为了开辟新天地唤醒了沉睡的高山让那河流改变了模样'
 
   nowrap.value = !nowrap.value
 }
@@ -114,7 +111,7 @@ function setNowrap() {
           歌词
         </template>
       </mu-table-column>
-      <mu-table-column label="原唱" min-width="80">
+      <mu-table-column label="原唱" min-width="20">
         <template #default="{ row }">
           {{ row?.yc }}
         </template>

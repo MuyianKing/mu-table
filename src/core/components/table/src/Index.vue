@@ -34,8 +34,6 @@ store.value.table.id = tableId
 const refresh_layout = ref(false)
 // 根据tbody设置thead
 function doLayout() {
-  console.log('doLayout')
-
   const table = document.getElementById(tableId)
   if (!table) {
     return
