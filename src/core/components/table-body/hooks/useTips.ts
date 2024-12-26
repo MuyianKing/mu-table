@@ -17,10 +17,17 @@ export default function (tooltip_id: string) {
 
     const content = target.textContent || ''
     tooltip_el.querySelector('.mu-table-tooltip-content')!.innerHTML = content
-    tooltip_el.style.display = 'block'
 
+    setPosition(target, tooltip_el)
+
+    setTimeout(() => {
+      tooltip_el.style.display = 'block'
+      setPosition(target, tooltip_el)
+    }, 0)
+  }, 100)
+
+  function setPosition(target: HTMLElement, tooltip_el: HTMLElement) {
     const arrow_el = tooltip_el.querySelector('.mu-table-tooltip-arrow') as HTMLElement
-
     computePosition(target, tooltip_el, {
       placement: 'top',
       middleware: [
@@ -36,7 +43,7 @@ export default function (tooltip_id: string) {
       tooltip_el.style.top = `${y}px`
       target.style.cursor = 'pointer'
 
-      const { x: arrowX, y: arrowY } = middlewareData.arrow
+      const arrow = middlewareData.arrow
 
       const staticSide = {
         top: 'bottom',
@@ -46,20 +53,21 @@ export default function (tooltip_id: string) {
       }[placement.split('-')[0]]
 
       Object.assign(arrow_el.style, {
-        left: arrowX != null ? `${arrowX}px` : '',
-        top: arrowY != null ? `${arrowY}px` : '',
+        left: arrow?.x != null ? `${arrow.x}px` : '',
+        top: arrow?.y != null ? `${arrow.y}px` : '',
         right: '',
         bottom: '',
         [staticSide as string]: '-4px',
       })
     })
-  }, 100)
+  }
 
   function hideTip(e: MouseEvent) {
     const el = document.getElementById(tooltip_id) as HTMLElement
     const target = e.target as HTMLElement
     target.style.cursor = ''
-    // el.style.display = 'none'
+    el.querySelector('.mu-table-tooltip-content')!.innerHTML = ''
+    el.style.display = 'none'
   }
 
   return {

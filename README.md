@@ -12,13 +12,14 @@
 ## 安装
 
 ```bash
-# npm
 npm i @muyianking/table
+```
 
-# yarn
-yarn global add @muyianking/table
+```bash
+yarn add @muyianking/table
+```
 
-# pnpm
+```bash
 pnpm i @muyianking/table
 ```
 
