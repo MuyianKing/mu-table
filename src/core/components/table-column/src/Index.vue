@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { Align, ColumnRow, ColumnSlot } from '../types/index'
+import type { Align, ColumnRow, ColumnSlot } from '@/core/types/index'
+import TableStore from '@/core/types/table-store'
+import { getCanUseValue } from '@/core/utils/common'
 import { inject, onMounted, onUnmounted, ref, useId, useSlots } from 'vue'
-import { getCanUseValue } from '../../utils/common'
-import TableStore from '../types/table-store'
 
 defineOptions({
   name: 'HlTableColumn',

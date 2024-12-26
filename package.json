@@ -6,14 +6,13 @@
   "scripts": {
     "commit": "git add . && git cz",
     "dev": "vite --host",
-    "build": "vue-tsc -b && vite build",
+    "build": "node ./script/build.js",
     "preview": "vite preview",
     "update-dep": "npm-check-updates & ncu -u & pnpm i"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.1.5",
     "@vueuse/core": "^12.2.0",
-    "element-plus": "^2.9.1",
     "vue": "^3.5.13"
   },
   "devDependencies": {
@@ -29,6 +28,7 @@
     "sass": "^1.83.0",
     "typescript": "^5.7.2",
     "vite": "^6.0.5",
+    "vite-plugin-dts": "^4.4.0",
     "vue-tsc": "^2.2.0"
   },
   "config": {

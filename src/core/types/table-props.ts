@@ -1,4 +1,4 @@
-import type { Align } from '../types/index'
+import type { Align } from './index'
 
 export default interface TableProps {
   data: unknown[]

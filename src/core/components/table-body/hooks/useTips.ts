@@ -1,5 +1,5 @@
 import { computePosition } from '@floating-ui/dom'
-import { isOverflow } from '../../../utils/dom'
+import { isOverflow } from '@/core/utils/dom'
 
 export default function (tooltip_id: string) {
   function setTips(e: MouseEvent, is_half: boolean) {

@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import type TableProps from '../types/TableProps'
+import type TableProps from '@/core/types/table-props.ts'
+import TableBody from '@/core/components/table-body/index.tsx'
+import TableHeader from '@/core/components/table-header/index.tsx'
+import ScrollBar from '@/core/components/table-scrollbar/index.tsx'
+import TableStore from '@/core/types/table-store.ts'
+import { getCanUseValue } from '@/core/utils/common.ts'
 import { useDebounceFn } from '@vueuse/core'
 import { nextTick, onMounted, provide, ref, useId, watch } from 'vue'
-import { getCanUseValue } from '../../utils/common'
-import TableStore from '../types/table-store'
-import useResize from './hooks/useResize'
-import ScrollBar from './ScrollBar.tsx'
-import TableBody from './table-body.tsx'
-import TableHeader from './table-header.tsx'
+import useResize from './hooks/useResize.ts'
 
 defineOptions({
   name: 'MuTable',
@@ -222,9 +222,3 @@ onMounted(() => {
     </div>
   </div>
 </template>
-
-<style lang='scss'>
-@use '../../style/index.scss';
-@use '../../style/theader.scss';
-@use '../../style/tbody.scss';
-</style>

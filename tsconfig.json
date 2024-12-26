@@ -10,6 +10,23 @@
 
     /* Bundler mode */
     "moduleResolution": "bundler",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@utils/*": [
+        "./src/core/utils/*"
+      ],
+      "@type/*": [
+        "./src/core/types/*"
+      ],
+      "@style/*": [
+        "./src/core/style/*"
+      ],
+      "@comp/*": [
+        "./src/core/components/*"
+      ]
+    },
     "allowImportingTsExtensions": true,
 
     /* Linting */
@@ -17,9 +34,11 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "declaration": true,
+    "declarationDir": "dist/types",
     "noEmit": true,
     "isolatedModules": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/core/index.ts", "src/core/index.ts"]
 }

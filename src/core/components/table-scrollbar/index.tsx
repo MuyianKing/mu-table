@@ -1,6 +1,6 @@
+import TableStore from '@/core/types/table-store'
 import { defineComponent, inject, ref } from 'vue'
-import TableStore from '../types/table-store'
-import '../../style/scrollbar.scss'
+import '@style/scrollbar.scss'
 
 export default defineComponent({
   name: 'MuTableScrollbar',

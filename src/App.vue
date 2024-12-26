@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Align } from './core/types'
+import type { Align } from '@/core/types/index'
 import { ref } from 'vue'
 import { MuTable, MuTableColumn } from './core'
 

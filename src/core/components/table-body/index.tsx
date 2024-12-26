@@ -1,7 +1,8 @@
-import type { ColumnRow } from '../types/index'
+import type { ColumnRow } from '@/core/types/index'
+import TableStore from '@/core/types/table-store'
 import { computed, defineComponent, inject, ref, useId } from 'vue'
-import TableStore from '../types/table-store'
 import useTips from './hooks/useTips'
+import '@style/tbody.scss'
 
 export default defineComponent({
   name: 'MuTableBody',

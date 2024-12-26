@@ -1,2 +1,2 @@
-export * from './table-column/index'
-export * from './table/index'
+export * from './components/table'
+export * from './components/table-column'
