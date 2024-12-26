@@ -2,10 +2,11 @@ import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
-
 import useAlias from './alias.config'
+import { MuTableResolver } from './src/core/resolver.ts'
 
 const { alias_map } = useAlias()
 
@@ -45,6 +46,11 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
+    Components({
+      resolvers: [
+        MuTableResolver(),
+      ],
+    }),
     dts({
       exclude: ['./src/main.ts'],
     }),

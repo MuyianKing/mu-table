@@ -24,6 +24,32 @@ pnpm i @muyianking/table
 
 ## 快速开始
 
+### 手动引入
+
+```js
+import { MuTable, MuTableColumn } from '@muyianking/table'
+import '@muyianking/table/index.css'
+```
+
+### 自动引入(unplugin-vue-components)
+
+```js
+// vite.config.js
+import { MuTableResolver } from '@muyianking/table'
+import Components from 'unplugin-vue-components/vite'
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  plugins: [
+    Components({
+      resolvers: [
+        MuTableResolver(),
+      ],
+    }),
+  ]
+})
+```
+
 ## 贡献
 
 <!-- readme: collaborators,contributors -start -->

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Align } from '@type/index'
-import { MuTable, MuTableColumn } from '@muyianking/table'
+
 import { getLabelByVal } from '@muyianking/utils'
 import { ref } from 'vue'
 
