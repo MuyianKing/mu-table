@@ -1,16 +1,9 @@
 {
 	"name": "@muyianking/table",
 	"type": "module",
-	"version": "0.0.2",
-	"exports": {
-		".": {
-			"types": "./index.d.ts",
-			"import": "./index.js"
-		}
-	},
-	"main": "index.js",
-	"module": "index.js",
-	"types": "index.d.ts",
+	"version": "0.0.3",
+	"module": "./index.js",
+	"types": "./index.d.ts",
 	"scripts": {
 		"commit": "git add . && git cz",
 		"dev": "vite --host",
