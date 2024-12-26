@@ -30,6 +30,7 @@ async function buildLib() {
     'module',
     'types',
     'dependencies',
+    'publishConfig',
   ].forEach((key) => {
     new_package[key] = package_json[key]
   })

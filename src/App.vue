@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import type { Align } from '@type/index'
+import { MuTable, MuTableColumn } from '@muyianking/table'
+import { getLabelByVal } from '@muyianking/utils'
 import { ref } from 'vue'
-import { MuTable, MuTableColumn } from './core'
+
+console.log(getLabelByVal([{ label: '11', value: 1 }], 1))
 
 const data = ref([{
   gc: '一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子',
@@ -113,7 +116,7 @@ function setNowrap() {
       </mu-table-column>
       <mu-table-column label="原唱" min-width="80">
         <template #default="{ row }">
-          {{ row.yc }}
+          {{ row?.yc }}
         </template>
       </mu-table-column>
       <mu-table-column label="操作" min-width="100" align="center">

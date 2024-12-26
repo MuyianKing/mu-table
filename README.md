@@ -1,10 +1,30 @@
-<h1 align="center">mu-table</h1>
+<h1 align="center">@muyianking/table</h1>
 
 <p align="center">
 单元格宽度根据内容自适应的table组件
 </p>
 
-## Contributors
+<p align="center">
+  <a target="_blank" href="https://www.npmjs.com/package/@muyianking/table" style="text-decoration: none;"><img  src="https://img.shields.io/npm/v/%40muyianking%2Ftable"/></a>
+  <a target="_blank" href="https://www.npmjs.com/package/@muyianking/table" style="text-decoration: none;"><img  src="https://img.shields.io/npm/dm/%40muyianking%2Ftable"/></a>
+</p>
+
+## 安装
+
+```bash
+# npm
+npm i @muyianking/table
+
+# yarn
+yarn global add @muyianking/table
+
+# pnpm
+pnpm i @muyianking/table
+```
+
+## 快速开始
+
+## 贡献
 
 <!-- readme: collaborators,contributors -start -->
 <table>
