@@ -19,7 +19,7 @@
     "preview": "vite preview",
     "update-dep": "npm-check-updates & ncu -u & pnpm i",
     "log": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "build": "vite build"
+    "build": "node ./script/build.js"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.1.5",

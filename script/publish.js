@@ -1,24 +1,12 @@
-import child_process from 'node:child_process'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import fsExtra from 'fs-extra'
 import ora from 'ora'
+import { exec } from './utils/common.js'
 import { getObjectFromJson } from './utils/file.js'
 
 const __dirname = fileURLToPath(import.meta.url)
-
-function exec(cmd) {
-  return new Promise((resolve, reject) => {
-    child_process.exec(cmd, (error) => {
-      if (!error) {
-        resolve('ok')
-      } else {
-        reject(error)
-      }
-    })
-  })
-}
 
 function showLog(instance, text) {
   instance.text = text
@@ -26,8 +14,7 @@ function showLog(instance, text) {
 }
 
 async function build() {
-  const spinner = ora(`vite build`).start()
-  showLog(spinner, 'create package.json')
+  const spinner = ora(`update package.json`).start()
   const package_path = path.resolve(__dirname, '../../package.json')
   const _config = getObjectFromJson(package_path)
 
@@ -38,28 +25,14 @@ async function build() {
   if (params.v) {
     version = `v${params.v}`
     _config.version = params.v
+
+    fsExtra.outputFile(
+      package_path,
+      JSON.stringify(_config, '', '\t'),
+      'utf-8',
+    )
   }
-
-  const new_package = {}
-    ;[
-    'name',
-    'type',
-    'version',
-    'exports',
-    'main',
-    'module',
-    'types',
-    'dependencies',
-  ].forEach((key) => {
-    new_package[key] = _config[key]
-  })
-
-  fsExtra.outputFile(
-    path.resolve(__dirname, '../../dist/package.json'),
-    JSON.stringify(new_package, '', '\t'),
-    'utf-8',
-  )
-  spinner.succeed('create package.json successfully')
+  spinner.succeed('update package.json successfully')
 
   try {
     spinner.succeed('create package.json')
