@@ -26,6 +26,7 @@ export default defineConfig({
           exports: 'named',
           dir: './dist',
           preserveModules: true,
+          preserveModulesRoot: 'core',
           entryFileNames: '[name].js',
           assetFileNames: 'index[extname]',
         },
@@ -35,7 +36,6 @@ export default defineConfig({
     lib: {
       entry: [
         resolve(__dirname, '../src/core/index.ts'),
-        resolve(__dirname, '../src/resolver/index.ts'),
       ],
     },
   },
