@@ -77,9 +77,7 @@ export default defineComponent({
 
         <div class="mu-table-tooltip" id={tooltip_id}>
           <div class="mu-table-tooltip-arrow"></div>
-          <div class="mu-table-tooltip-content">
-            这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字这是一段测试文字
-          </div>
+          <div class="mu-table-tooltip-content"></div>
         </div>
       </table>
     )
