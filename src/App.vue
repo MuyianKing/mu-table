@@ -4,7 +4,7 @@ import { MuTable, MuTableColumn } from '@/core'
 import { ref } from 'vue'
 
 const data = ref([{
-  gc: '一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子,一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子,一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子',
+  gc: '一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子',
   yc: '郭兰英',
   index: 1,
 }])
@@ -58,7 +58,7 @@ function setStripe() {
   stripe.value = !stripe.value
 }
 
-const nowrap = ref(true)
+const nowrap = ref(false)
 function setNowrap() {
   data.value[0].gc = '一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子;看惯了船上的白帆姑娘好像花儿一样小伙儿心胸多宽广为了开辟新天地唤醒了沉睡的高山让那河流改变了模样；一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子;看惯了船上的白帆姑娘好像花儿一样小伙儿心胸多宽广为了开辟新天地唤醒了沉睡的高山让那河流改变了模样'
 
@@ -100,7 +100,7 @@ function setNowrap() {
       自定义class
     </div>
     <div class="button ml-4" @click="setNowrap">
-      内容不换行
+      内容{{ nowrap ? '' : '不' }}换行
     </div>
   </div>
   <div style="padding: 10px;height: calc(100% - 20px);">
