@@ -2,8 +2,10 @@ import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import fsExtra from 'fs-extra'
+import inquirer from 'inquirer'
 import ora from 'ora'
 import { exec } from './utils/common.js'
+
 import { getObjectFromJson } from './utils/file.js'
 
 const __dirname = fileURLToPath(import.meta.url)
@@ -69,4 +71,32 @@ function getParams() {
   return params
 }
 
-build()
+// 打包确认
+function inquirerPrompt() {
+  return new Promise((resolve, reject) => {
+    inquirer.prompt([
+      {
+        type: 'list',
+        name: 'release',
+        message: '您确定切换到主分支并合并了最新的代码？',
+        choices: ['是', '否'],
+        filter(value) {
+          return {
+            是: '1',
+            否: '2',
+          }[value]
+        },
+      },
+    ]).then((answers) => {
+      resolve(answers)
+    }).catch((error) => {
+      reject(error)
+    })
+  })
+}
+
+inquirerPrompt().then(({ release }) => {
+  if (release === '1') {
+    build()
+  }
+})
