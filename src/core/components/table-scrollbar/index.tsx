@@ -72,7 +72,7 @@ export default defineComponent({
     })
 
     return () => (
-      <div class={`mu-table-scroll-bar ${props.active ? 'active' : ''}`} />
+      show_scroll.value ? <div class={`mu-table-scroll-bar ${props.active ? 'active' : ''}`} /> : <div></div>
     )
   },
 })
