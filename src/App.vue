@@ -114,7 +114,7 @@ function setNowrap() {
           歌词
         </template>
       </mu-table-column>
-      <mu-table-column label="原唱" min-width="20">
+      <mu-table-column label="原唱">
         <template #default="{ row }">
           {{ row?.yc }}
         </template>

@@ -69,7 +69,7 @@ export default function (tooltip_id: string) {
     const target = e.target as HTMLElement
     target.style.cursor = ''
     el.querySelector('.mu-table-tooltip-content')!.innerHTML = ''
-    // el.style.display = 'none'
+    el.style.display = 'none'
   }
 
   return {

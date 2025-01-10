@@ -18,6 +18,10 @@ async function buildLib() {
   const package_path = path.resolve(__dirname, `../../README.md`)
   copyFileSync(package_path, path.resolve(outputDir, `README.md`), constants.COPYFILE_EXCL)
 
+  // 拷贝LICENSE
+  const LICENSE_path = path.resolve(__dirname, `../../LICENSE`)
+  copyFileSync(LICENSE_path, path.resolve(outputDir, `LICENSE`), constants.COPYFILE_EXCL)
+
   // 生成package.json
   const package_json = getObjectFromJson(path.resolve(__dirname, `../../package.json`))
   const new_package = {}
@@ -31,6 +35,8 @@ async function buildLib() {
     'types',
     'dependencies',
     'publishConfig',
+    'repository',
+    'keywords',
   ].forEach((key) => {
     new_package[key] = package_json[key]
   })
