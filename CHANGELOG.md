@@ -1,3 +1,14 @@
+## [0.1.3](https://github.com/MuyianKing/mu-table/compare/v0.1.2...v0.1.3) (2025-01-10)
+
+
+### Bug Fixes
+
+* :bug: 完善package.json ([a5ad927](https://github.com/MuyianKing/mu-table/commit/a5ad92713a591196d602962a9a105c1ff39df271))
+* :bug: 修复滚动条在内容不溢出的情况下依然存在问题 ([2211889](https://github.com/MuyianKing/mu-table/commit/2211889a42942a857e417d11b2febf3b358bb54a))
+* :bug: 修改外部有滚动条的情况下tooltip定位问题 ([4c685ee](https://github.com/MuyianKing/mu-table/commit/4c685ee000db9cb3f96dcb900e14328617f2069d))
+
+
+
 ## 0.1.2(2024-12-27)
 
 ### Bug Fixes
