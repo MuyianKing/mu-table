@@ -39,8 +39,10 @@ export default function (tooltip_id: string) {
         }),
       ],
     }).then(({ x, y, placement, middlewareData }) => {
+      const scroll_top = document.getElementsByTagName('html')[0].scrollTop
+
       tooltip_el.style.left = `${x}px`
-      tooltip_el.style.top = `${y}px`
+      tooltip_el.style.top = `${y - scroll_top}px`
       target.style.cursor = 'pointer'
 
       const arrow = middlewareData.arrow
@@ -67,7 +69,7 @@ export default function (tooltip_id: string) {
     const target = e.target as HTMLElement
     target.style.cursor = ''
     el.querySelector('.mu-table-tooltip-content')!.innerHTML = ''
-    el.style.display = 'none'
+    // el.style.display = 'none'
   }
 
   return {

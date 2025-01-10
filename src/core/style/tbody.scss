@@ -27,7 +27,7 @@
 }
 
 .mu-table-tooltip {
-  position: absolute;
+  position: fixed;
   background-color: #000;
   color: white;
   padding: 5px 10px;
@@ -42,7 +42,7 @@
 
 .mu-table-tooltip-arrow {
   position: absolute;
-  background: #222;
+  background: #000;
   width: 8px;
   height: 8px;
   transform: rotate(45deg);
