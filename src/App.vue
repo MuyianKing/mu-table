@@ -103,6 +103,9 @@ function setNowrap() {
       内容{{ nowrap ? '' : '不' }}换行
     </div>
   </div>
+  <div style="height: 400px;">
+    hhh
+  </div>
   <div style="padding: 10px;height: calc(100% - 20px);">
     <mu-table :data :max-height :align :no-border :stripe :scrollbar-always-on :row-class :nowrap>
       <mu-table-column prop="index" label="序号" />

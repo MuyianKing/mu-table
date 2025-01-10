@@ -1,3 +1,7 @@
+.mu-table-body{
+  position: relative;
+}
+
 .mu-table-td {
   line-height: 23px;
   word-break: break-all;
@@ -23,7 +27,7 @@
 }
 
 .mu-table-tooltip {
-  position: fixed;
+  position: absolute;
   background-color: #000;
   color: white;
   padding: 5px 10px;
