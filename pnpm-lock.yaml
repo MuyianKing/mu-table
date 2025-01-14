@@ -30,6 +30,9 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^19.6.0
         version: 19.6.0
+      '@muyianking/build':
+        specifier: ^0.0.1
+        version: 0.0.1
       '@vitejs/plugin-vue':
         specifier: ^5.2.1
         version: 5.2.1(vite@6.0.6(@types/node@22.10.2)(jiti@2.4.2)(sass@1.83.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.7.2))
@@ -677,6 +680,9 @@ packages:
 
   '@microsoft/tsdoc@0.15.1':
     resolution: {integrity: sha512-4aErSrCR/On/e5G2hDP0wjooqDdauzEbIq8hIkIe5pXV0rtWJZvdCEKL0ykZxex+IxIwBp0eGeV48hQN07dXtw==}
+
+  '@muyianking/build@0.0.1':
+    resolution: {integrity: sha512-16Xh5Mv9lod/NYamiMVl56UYEZ/Qa5DMwhJnjI37OdSsCxQMKEP7be9hNfsLSMpLZGDs391IvaU2GWZACwnXTw==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -3646,6 +3652,10 @@ snapshots:
       resolve: 1.22.8
 
   '@microsoft/tsdoc@0.15.1': {}
+
+  '@muyianking/build@0.0.1':
+    dependencies:
+      fs-extra: 11.2.0
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:

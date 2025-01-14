@@ -1,6 +1,5 @@
 import path from 'node:path'
-import { exec } from './utils/common.js'
-import { copy, getDir, getObjectFromJson, objectToJson } from './utils/file.js'
+import { copy, exec, getDir, getObjectFromJson, objectToJson } from '@muyianking/build'
 
 const __dirname = getDir(import.meta.url)
 

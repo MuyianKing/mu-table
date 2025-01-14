@@ -1,8 +1,7 @@
 import path from 'node:path'
+import { exec, getDir, getObjectFromJson, getParams, objectToJson, showLog } from '@muyianking/build'
 import inquirer from 'inquirer'
 import ora from 'ora'
-import { exec, getParams, showLog } from './utils/common.js'
-import { getDir, getObjectFromJson, objectToJson } from './utils/file.js'
 
 const __dirname = getDir(import.meta.url)
 
