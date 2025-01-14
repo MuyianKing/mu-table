@@ -39,8 +39,10 @@ export default function (tooltip_id: string) {
         }),
       ],
     }).then(({ x, y, placement, middlewareData }) => {
+      const scroll_top = document.getElementsByTagName('html')[0].scrollTop
+
       tooltip_el.style.left = `${x}px`
-      tooltip_el.style.top = `${y}px`
+      tooltip_el.style.top = `${y - scroll_top}px`
       target.style.cursor = 'pointer'
 
       const arrow = middlewareData.arrow
