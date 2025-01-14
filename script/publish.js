@@ -1,19 +1,10 @@
 import path from 'node:path'
-import process from 'node:process'
-import { fileURLToPath } from 'node:url'
-import fsExtra from 'fs-extra'
 import inquirer from 'inquirer'
 import ora from 'ora'
-import { exec } from './utils/common.js'
+import { exec, getParams, showLog } from './utils/common.js'
+import { getDir, getObjectFromJson, objectToJson } from './utils/file.js'
 
-import { getObjectFromJson } from './utils/file.js'
-
-const __dirname = fileURLToPath(import.meta.url)
-
-function showLog(instance, text) {
-  instance.text = text
-  instance.start()
-}
+const __dirname = getDir(import.meta.url)
 
 async function build() {
   const spinner = ora(`update package.json`).start()
@@ -27,12 +18,7 @@ async function build() {
   if (params.v) {
     version = `v${params.v}`
     _config.version = params.v
-
-    fsExtra.outputFile(
-      package_path,
-      JSON.stringify(_config, '', '\t'),
-      'utf-8',
-    )
+    objectToJson(package_path, _config)
   }
   spinner.succeed('update package.json successfully')
 
@@ -55,20 +41,6 @@ async function build() {
     spinner.fail('spinner')
     console.log(error)
   }
-}
-
-// 获取参数
-function getParams() {
-  const params = {}
-  process.argv.forEach((item) => {
-    item = item.split('=')
-
-    if (item.length === 2) {
-      params[item[0]] = item[1]
-    }
-  })
-
-  return params
 }
 
 // 打包确认
