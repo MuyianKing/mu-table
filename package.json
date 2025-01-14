@@ -33,6 +33,7 @@
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
     "@muyianking/build": "^0.0.1",
+    "@muyianking/config": "^0.0.4",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitejs/plugin-vue-jsx": "^4.1.1",
     "cz-git": "^1.11.0",
