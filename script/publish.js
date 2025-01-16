@@ -35,7 +35,7 @@ async function build() {
     showLog(spinner, 'git push && git tag && git push')
     await exec(`git push && git tag ${version} && git push origin ${version}`)
     spinner.succeed('git push && git tag && git push')
-    spinner.succeed('publish successful, waiting for GitHub to automatically Release it to npm')
+    spinner.succeed('publish successful, waiting for GitHub to automatically release it to npm')
   } catch (error) {
     spinner.fail('spinner')
     console.log(error)
