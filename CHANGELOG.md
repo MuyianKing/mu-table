@@ -1,3 +1,19 @@
+## [0.1.4](https://github.com/MuyianKing/mu-table/compare/v0.1.3...v0.1.4) (2025-01-16)
+
+
+### Bug Fixes
+
+* :bug: 修复打包时生成的package.json缺失部分字段问题 ([3d4414e](https://github.com/MuyianKing/mu-table/commit/3d4414efe9a5310d789c02d8db1e0b2303f95c96))
+* :bug: 优化tooltip定位方式 ([85b7bf9](https://github.com/MuyianKing/mu-table/commit/85b7bf9a1abf772c2bef8b246f6ec8e9e275613f))
+
+
+### Features
+
+* :sparkles: 增减@muyianking/build包 ([e15e011](https://github.com/MuyianKing/mu-table/commit/e15e0117f2b024e9aaa50c1113ed39994768e0a9))
+* :sparkles: package.json增加homepage ([1eabeb2](https://github.com/MuyianKing/mu-table/commit/1eabeb28deaf2786e8ee0fa02ea26fd6fdad4b2e))
+
+
+
 ## [0.1.3](https://github.com/MuyianKing/mu-table/compare/v0.1.2...v0.1.3) (2025-01-10)
 
 
