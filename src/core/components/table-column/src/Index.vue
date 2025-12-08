@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { Align, ColumnRow, ColumnSlot } from '@/core/types/index'
+import { inject, onMounted, onUnmounted, ref, useId, useSlots } from 'vue'
 import TableStore from '@/core/types/table-store'
 import { getCanUseValue } from '@/core/utils/common'
-import { inject, onMounted, onUnmounted, ref, useId, useSlots } from 'vue'
 
 defineOptions({
   name: 'HlTableColumn',

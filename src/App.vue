@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Align } from '@type/index'
-import { MuTable, MuTableColumn } from '@/core'
 import { ref } from 'vue'
+import { MuSmartTable, MuTable, MuTableColumn } from '@/core'
 
 const data = ref([{
   gc: '一条大河波浪宽风吹稻花香两岸,我家就在岸上住听惯了艄公的号子',
@@ -64,6 +64,29 @@ function setNowrap() {
 
   nowrap.value = !nowrap.value
 }
+
+const dataList = ref([
+  {
+    name: 'muyian',
+    age: 12,
+    pos: '测试',
+  },
+])
+
+const config = [
+  {
+    label: '姓名',
+    prop: 'name',
+  },
+  {
+    label: '年龄',
+    prop: 'age',
+  },
+  {
+    label: '职位',
+    prop: 'pos',
+  },
+]
 </script>
 
 <template>
@@ -103,8 +126,15 @@ function setNowrap() {
       内容{{ nowrap ? '' : '不' }}换行
     </div>
   </div>
-  <div style="height: 400px;">
-    hhh
+  <div style="height: 400px;padding:10px;">
+    <mu-smart-table :config :data="dataList">
+      <template #pos>
+        <div>测试自定义：职位</div>
+      </template>
+      <template #pos-header>
+        <div>测试自定义表头：职位</div>
+      </template>
+    </mu-smart-table>
   </div>
   <div style="padding: 10px;height: calc(100% - 20px);">
     <mu-table :data :max-height :align :no-border :stripe :scrollbar-always-on :row-class :nowrap>
