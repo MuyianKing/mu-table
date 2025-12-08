@@ -5,7 +5,7 @@ import TableStore from '@/core/types/table-store'
 import { getCanUseValue } from '@/core/utils/common'
 
 defineOptions({
-  name: 'HlTableColumn',
+  name: 'MuTableColumn',
 })
 
 const props = defineProps<{
@@ -26,7 +26,9 @@ function DEFAULT_RENDER_CELL({ row }: ColumnRow): string {
     return ''
   }
 
-  return (row[props.prop] === undefined || row[props.prop] === null) ? '' : row[props.prop]
+  return row[props.prop] === undefined || row[props.prop] === null
+    ? ''
+    : row[props.prop]
 }
 
 // 插槽

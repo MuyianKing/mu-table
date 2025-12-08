@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type TableProps from '@/core/types/table-props.ts'
+import { useDebounceFn } from '@vueuse/core'
+import { nextTick, onMounted, provide, ref, useId, watch } from 'vue'
 import TableBody from '@/core/components/table-body/index.tsx'
 import TableHeader from '@/core/components/table-header/index.tsx'
 import ScrollBar from '@/core/components/table-scrollbar/index.tsx'
 import TableStore from '@/core/types/table-store.ts'
 import { getCanUseValue } from '@/core/utils/common.ts'
-import { useDebounceFn } from '@vueuse/core'
-import { nextTick, onMounted, provide, ref, useId, watch } from 'vue'
 import useResize from './hooks/useResize.ts'
 
 defineOptions({
@@ -155,36 +155,43 @@ function clearStyle() {
   store.value.setColumns(columns)
 }
 
-watch(() => props.data, (val) => {
-  store.value.setData(val)
-  // 取消不换行
-  refresh_layout.value = true
-  // 重新布局
-  nextTick(() => {
-    doLayout()
-  })
-}, {
-  immediate: true,
-  deep: true,
-})
+watch(
+  () => props.data,
+  (val) => {
+    store.value.setData(val)
+    // 取消不换行
+    refresh_layout.value = true
+    // 重新布局
+    nextTick(() => {
+      doLayout()
+    })
+  },
+  {
+    immediate: true,
+    deep: true,
+  },
+)
 
-watch(() => store.value.columns.length, () => {
-  nextTick(() => {
-    resize()
-  })
-})
+watch(
+  () => store.value.columns.length,
+  () => {
+    nextTick(() => {
+      resize()
+    })
+  },
+)
 
-watch([
-  () => props.nowrap,
-  () => props.align,
-  () => props.rowKey,
-], () => {
-  store.value.table.align = props.align
-  store.value.table.nowrap = props.nowrap
-  store.value.table.rowKey = props.rowKey
-}, {
-  immediate: true,
-})
+watch(
+  [() => props.nowrap, () => props.align, () => props.rowKey],
+  () => {
+    store.value.table.align = props.align
+    store.value.table.nowrap = props.nowrap
+    store.value.table.rowKey = props.rowKey
+  },
+  {
+    immediate: true,
+  },
+)
 
 // 监听表格容器变化，重新布局
 const resize = useDebounceFn(() => {
@@ -207,16 +214,31 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :id="tableId" class="mu-table" :class="{ 'mu-table-border': !noBorder, 'mu-table-nowrap': nowrap && !refresh_layout, 'mu-table-stripe': stripe }">
+  <div :id="tableId"
+       class="mu-table"
+       :class="{
+         'mu-table-border': !noBorder,
+         'mu-table-nowrap': nowrap && !refresh_layout,
+         'mu-table-stripe': stripe,
+       }"
+  >
     <div class="hidden-columns">
       <slot />
     </div>
     <table-header />
-    <div class="body-wrapper" :style="{ maxHeight: getCanUseValue(maxHeight) }" @scroll="handleScroll" @mouseenter="scroll_bar_active = data.length > 0 && true" @mouseleave="scroll_bar_active = false">
+    <div class="body-wrapper"
+         :style="{ maxHeight: getCanUseValue(maxHeight) }"
+         @scroll="handleScroll"
+         @mouseenter="scroll_bar_active = data.length > 0 && true"
+         @mouseleave="scroll_bar_active = false"
+    >
       <table-body :row-class />
 
       <!-- 自定义滚动条 -->
-      <scroll-bar ref="scroll_bar" :table-id="tableId" :active="scrollbarAlwaysOn || scroll_bar_active" />
+      <scroll-bar ref="scroll_bar"
+                  :table-id="tableId"
+                  :active="scrollbarAlwaysOn || scroll_bar_active"
+      />
     </div>
   </div>
 </template>

@@ -1,5 +1,5 @@
-import TableStore from '@/core/types/table-store'
 import { computed, defineComponent, inject, ref } from 'vue'
+import TableStore from '@/core/types/table-store'
 import '@style/theader.scss'
 
 export default defineComponent({

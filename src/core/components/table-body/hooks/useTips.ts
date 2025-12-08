@@ -1,6 +1,6 @@
-import { isOverflow } from '@/core/utils/dom'
 import { arrow, computePosition, flip, offset, shift } from '@floating-ui/dom'
 import { useDebounceFn } from '@vueuse/core'
+import { isOverflow } from '@/core/utils/dom'
 
 export default function (tooltip_id: string) {
   const setTips = useDebounceFn((e: MouseEvent) => {
