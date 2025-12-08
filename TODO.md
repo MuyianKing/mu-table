@@ -1,1 +1,2 @@
 - smart-table
+- 由于@muyianking/build包不再提供文件操作相关的api，打包发布脚本需要迁移至fs-extra
