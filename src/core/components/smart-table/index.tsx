@@ -18,24 +18,28 @@ export default defineComponent({
       },
     },
   },
+  components: {
+    MuTable,
+    MuTableColumn,
+  },
   setup(props, { slots }) {
     const config = props.config
 
     return () => (
-      <MuTable data={props.data}>
+      <mu-table data={props.data}>
         {
           config.map((item) => {
             return (
-              <MuTableColumn prop={item.prop} label={item.label}>
+              <mu-table-column prop={item.prop} label={item.label}>
                 {{
                   default: slots[item.prop],
                   header: slots[`${item.prop}-header`],
                 }}
-              </MuTableColumn>
+              </mu-table-column>
             )
           })
         }
-      </MuTable>
+      </mu-table>
     )
   },
 })
